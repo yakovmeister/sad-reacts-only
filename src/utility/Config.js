@@ -4,7 +4,7 @@ import { is_directory, read_directory } from './index'
 export default class Config {
     constructor(env, configPath) {
         if(!env)
-            throw new Error('No env function passsed.')
+            throw new Error('No env function passed.')
 
         this.instance = undefined
         this.env = env
@@ -22,7 +22,7 @@ export default class Config {
      */
      loadFromFile(dir) {
         if(!is_directory(dir))
-            throw new Oops('Valid directory path is expected.')
+            throw new Error('Valid directory path is expected.')
 
         read_directory(dir).forEach(fileName => {
             if(fileName && fileName.includes('.js')) {

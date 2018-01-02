@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import TopNav from './../components/TopNav'
+import { renderRoutes } from "react-router-config";
 
-export default class App extends React.PureComponent {
-	constructor(props) {
-		super(props)
-	}
+const AppRoot = (props) => {
+  return (
+    <div>
+    	<TopNav />
+    	{ renderRoutes(props.route.routes) }
+    </div>
+  );
+};
 
-	render() {
-		return ( 
-			<TopNav />
-		)
-	}
-}
+export default AppRoot;

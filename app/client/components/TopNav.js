@@ -5,7 +5,7 @@ const TopNav = (props) => {
 	return (
 		<Navbar>
 			<NavbarGroup>
-		        <NavbarHeading>Blueprint</NavbarHeading>
+		        <NavbarHeading>Title</NavbarHeading>
 		    </NavbarGroup>
 		</Navbar>
 	)

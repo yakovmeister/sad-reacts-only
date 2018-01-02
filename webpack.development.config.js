@@ -9,13 +9,18 @@ const extractSass = new ExtractTextPlugin({
 })
 
 module.exports = {
+    context: __dirname,
     entry: [
-        __dirname + '/app/client/index.js',
+        __dirname + '/app/client/app.js',
         __dirname + '/sass/app.scss'
     ],
     output: {
-        filename: 'app.min.js',
-        path: path.resolve(__dirname, 'public/assets/js')
+        filename: 'js/app.min.js',
+        path: __dirname + '/public/assets/js',
+        publicPath: 'http://localhost:8080/assets/js'
+    },  
+    resolve: {
+        extensions: ['.js', '.jsx']
     },
     module: {
         loaders: [
@@ -47,7 +52,7 @@ module.exports = {
                         }
                     ],
                     fallback: ['style-loader'],
-                    publicPath: path.resolve(__dirname, 'public/assets/css')
+                    publicPath: '/assets/css'
                 })
             },
             {
@@ -57,9 +62,8 @@ module.exports = {
         ]
     },
     plugins: [
-    extractSass,
+        extractSass,
         new HtmlWebpackPlugin({
-            title: 'index',
             chunksSortMode: 'dependency',
             template: './app/views/index.pug',
             filename: '../../index.html',

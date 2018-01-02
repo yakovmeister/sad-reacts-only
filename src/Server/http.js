@@ -14,7 +14,9 @@ const server = (config) => {
 	const { port, secret, viewPath, publicPath } = config
  	const MS = memoryStore(session)
 
-	app.use(bodyParser.json({ type: 'application/*+json' }))
+
+	app.use(bodyParser.json())
+	app.use(bodyParser.urlencoded({ extended: false }))
 	app.use(bodyParser.raw({ type: 'application/javascript' }))
 	app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
 	app.use(bodyParser.text({ type: 'text/html' }))

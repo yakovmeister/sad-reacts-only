@@ -4,7 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack -d --config webpack.development.config.js && nodemon bin/development",
+    "postinstall": "npm run compile",
+    "clean": "rm -rf dist && mkdir dist",
+    "clean:compile": "rm -rf dist/compiled",
+    "compile:babel": "babel-compile -p env src:dist",
+    "compile:minify": "minify dist/compiled -d dist",
+    "compile": "npm run clean && npm run compile:babel",
+    "dev:webpack": "webpack -d --config webpack.development.config.js --hot",
+    "dev:server": "nodemon bin/development",
+    "dev": "npm-run-all --parallel dev:server dev:webpack",
+    "prod": "webpack -p --progress --config webpack.production.config.js",
     "test": "_mocha test --require babel-polyfill --require babel-register"
   },
   "keywords": [],
@@ -12,7 +21,6 @@
   "license": "ISC",
   "dependencies": {
     "@blueprintjs/core": "^1.35.0",
-    "antd": "^3.1.0",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
@@ -55,6 +63,7 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "css-loader": "^0.28.7",
+    "envify": "^4.1.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
@@ -62,15 +71,19 @@
     "less-loader": "^4.0.5",
     "mocha": "^4.1.0",
     "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.0.9",
     "pug-html-loader": "^1.1.5",
     "pug-loader": "^2.3.0",
     "react-addons-perf": "^15.4.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
+    "uglify-js": "^3.3.4",
+    "uglifyify": "^4.0.5",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1",
     "xo": "^0.18.2"
   }
 }

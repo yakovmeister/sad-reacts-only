@@ -15,9 +15,9 @@ module.exports = {
         __dirname + '/sass/app.scss'
     ],
     output: {
-        filename: 'js/app.min.js',
+        filename: 'app.min.js',
         path: __dirname + '/public/assets/js',
-        publicPath: 'http://localhost:8080/assets/js'
+        publicPath: '/assets/js'
     },  
     resolve: {
         extensions: ['.js', '.jsx']
@@ -65,8 +65,8 @@ module.exports = {
         extractSass,
         new HtmlWebpackPlugin({
             chunksSortMode: 'dependency',
-            template: './app/views/index.pug',
-            filename: '../../index.html',
+            template:  __dirname + '/app/views/layout/template.pug',
+            filename: __dirname + '/public/index.html',
             inject: false
         })
     ],

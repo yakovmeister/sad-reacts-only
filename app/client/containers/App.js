@@ -4,10 +4,10 @@ import { renderRoutes } from "react-router-config";
 
 const AppRoot = (props) => {
   return (
-    <div>
+    <Fragment>
     	<TopNav />
     	{ renderRoutes(props.route.routes) }
-    </div>
+    </Fragment>
   );
 };
 

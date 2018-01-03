@@ -3,14 +3,14 @@ import { Navbar, NavbarDivider, NavbarGroup, NavbarHeading, Switch, Button } fro
 
 const TopNav = (props) => {
 	return (
-		<Navbar>
+		<Navbar className='pt-dark pt-fixed-top'>
 			 <NavbarGroup align="right">
 		        <Button className="pt-minimal" iconName="home">Home</Button>
 		        <Button className="pt-minimal" iconName="document">Projects</Button>
 		        <Button className="pt-minimal" iconName="document">Contact</Button>
 		    </NavbarGroup>
 		</Navbar>
-	)
+	) 
 }
 
 export default TopNav

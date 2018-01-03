@@ -1,1 +1,12 @@
 @import "~@blueprintjs/core/dist/blueprint.css";
+@import "~@blueprintjs/core/dist/variables";
+
+.container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.pt-fixed-top + .container {
+	margin-top: $pt-navbar-height;
+}

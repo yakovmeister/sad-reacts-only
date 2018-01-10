@@ -1,11 +1,10 @@
-export default `
-	type User {
-		id: ID
-		username: String!
-		full_name: String!
-	}
+import { GraphQLObjectType, GraphQLString } from 'graphql'
 
-	type Query {
-		all: [User!]!
-	}
-`
+export default new GraphQLObjectType({
+  name: 'Users',
+  fields: {
+    id: {
+      type: GraphQLString
+    }
+  }
+})

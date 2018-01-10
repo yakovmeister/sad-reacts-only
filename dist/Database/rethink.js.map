@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "sources": [
+    "rethink.js"
+  ],
+  "names": [
+    "Rethink"
+  ],
+  "mappings": ";;;;;;AAAA;;;;;;;;IAEqBA,O,GACnB,mBAAc;AAAA;AAAE,C;;kBADGA,O",
+  "file": "rethink.js",
+  "sourceRoot": "../../src/Database",
+  "sourcesContent": [
+    "import r from 'rethinkdb'\n\nexport default class Rethink {\n  constructor() {}\n}\n"
+  ]
+}

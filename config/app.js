@@ -4,6 +4,6 @@ module.exports = (env) => {
 
 		viewPath: 	env('APP_VIEWS', './app/views'),
 		
-		port: 		env('SERVER_PORT', 8080)
+		port: 		env('SERVER_PORT', 8888)
 	}
 }

@@ -1,12 +1,7 @@
-import users from './../resolver/user'
-import { graphql } from 'graphql'
+
 
 export default new (class Users {
-	index(req, res) {
-		graphql(users, `{ all { id, username } }`).then(results => {
-			res.send(results)
-		})
-	}
+	index(req, res) {}
 
 	get(req, res) {}
 

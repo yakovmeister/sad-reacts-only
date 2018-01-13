@@ -1,13 +1,13 @@
 import Private from 'private-props'
 
-class Builder {
+export default class Builder {
   constructor(r) {
     Private(this).r = r
   }
 
-  create(table) {
+  create(table, options = {}) {
     return Private(this).r.console(r =>
-      r.tableCreate(table)
+      r.tableCreate(table, options)
     )
   }
 

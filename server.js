@@ -3,6 +3,8 @@ const { default: routes } = require('./app/route')
 const { env: init_env, Config, base_path } = require('./src/utility')
 const env = init_env()
 const config = new Config(env, base_path() + '/config')
+const { default: Thoughts } = require('./src/Database/Thoughts')
+global.thoughts = new Thoughts()
 
 const args = Object.assign(
   {},

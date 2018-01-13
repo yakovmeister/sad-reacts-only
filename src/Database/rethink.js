@@ -39,10 +39,8 @@ export default class Rethink {
   }
 
   async console(closure) {
-    const results = await closure(Private(this).r)
+    return await closure(Private(this).r)
       .run(await Private(this).connection)
-
-    return results
   }
 
   async query(closure) {

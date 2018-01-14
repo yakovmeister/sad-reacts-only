@@ -11,6 +11,28 @@ export default class Thoughts {
 		Private(this).blueprints = []
 	}
 
+	createModel(table) {
+		const rdb = Private(this).r
+
+		return class {
+			constructor() {
+				this.table = table
+			}
+
+			all(opts) {
+				return rdb.console(cmd => 
+					cmd.table(table).coerceTo('array')
+				)
+			}
+
+			get(id) {
+				return rdb.console(cmd => 
+					cmd.table(table).get(id)
+				)
+			}
+		}
+	}
+
 	console(callback) {
 		return Private(this).r.console(callback)
 	}

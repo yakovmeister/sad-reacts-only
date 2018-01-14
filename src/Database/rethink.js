@@ -6,7 +6,7 @@ export default class Rethink {
     Private(this).connection = null
     Private(this).r = r
     Private(this).options = {
-      host: opts.host || 'localhost',
+      host: opts.host || '127.0.0.1',
       port: opts.port || 28015,
       db: opts.db || 'test',
       user: opts.user || 'admin',

@@ -9,10 +9,13 @@ export default class Thoughts {
 		Private(this).connection = Private(this).r.open()
 		Private(this).builder = new Builder(Private(this).connection)
 		Private(this).blueprints = []
+		Private(this).schema = {}
 	}
 
-	createModel(table) {
+	createModel(table, callback) {
+		Private(this).schema = joi.object().keys(callback(joi))
 		const rdb = Private(this).r
+		const schema = Private(this).schema
 
 		return class {
 			constructor() {
@@ -29,6 +32,40 @@ export default class Thoughts {
 				return rdb.console(cmd => 
 					cmd.table(table).get(id)
 				)
+			}
+
+			async create(obj) {
+				const validation = await joi.validate(obj, schema)
+
+				if (validation.error) {
+					return validation.error
+				}
+
+				return rdb.console(cmd => 
+					cmd.table(table).insert(obj)
+				)
+			}
+
+			update(id) {
+				return rdb.console(cmd =>
+					cmd.table(table).get(obj.id).update(obj)
+				)
+			}
+
+			delete(id) {
+				return rdb.console(cmd =>
+					cmd.table(table).get(id).delete()
+				)
+			}
+
+			extendModel(name, fn) {
+				this[name] = new Proxy(fn, {
+					apply: function apply(fn, arg, args) {
+						return rdb.console(cmd => 
+							fn(cmd.table(table), ...args)
+						)
+					}
+				})
 			}
 		}
 	}

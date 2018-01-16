@@ -2,6 +2,7 @@ import r from './rethink'
 import Builder from './Builder'
 import Private from 'private-props'
 import joi from 'joi'
+import { relate } from '../../../../../.cache/typescript/2.6/node_modules/@types/relateurl';
 
 export default class Thoughts {
 	constructor(options) {
@@ -19,13 +20,38 @@ export default class Thoughts {
 
 		return class {
 			constructor() {
-				this.table = table
+        this.table = table
+        this.hasOne = []
+        this.hasMany = []
 			}
 
-			all(opts) {
-				return rdb.console(cmd => 
-					cmd.table(table).coerceTo('array')
-				)
+			all({ start, limit, orderBy, direction }) {
+				return rdb.console(cmd => {
+          let base = cmd.table(table)
+
+          if (Object.keys(this.hasOne).length || Object.keys(this.hasMany).length) {
+            base = base.merge(e => {
+              let relations = {}
+
+              // this.hasOne.forEach(single => {
+              //   relations[single.table] = cmd.table(single.table).getAll({
+              //     [single.field]: single.id
+              //   }).nth(0).default({})
+              // })
+
+              // this.hasMany.forEach(many => {
+              //   relations[many.table] = cmd.table(single.table).getAll({
+
+              //   })
+              // })
+
+              return {
+
+              }
+            })
+          }
+
+        })
 			}
 
 			get(id) {
@@ -59,6 +85,10 @@ export default class Thoughts {
 			}
 
 			extendModel(name, fn) {
+				if(this[name]) {
+          throw new Error(`${name} already exist in ${table} class`)
+        }          
+
 				this[name] = new Proxy(fn, {
 					apply: function apply(fn, arg, args) {
 						return rdb.console(cmd => 

@@ -2,7 +2,6 @@ import r from './rethink'
 import Builder from './Builder'
 import Private from 'private-props'
 import joi from 'joi'
-import { relate } from '../../../../../.cache/typescript/2.6/node_modules/@types/relateurl';
 
 export default class Thoughts {
 	constructor(options) {
@@ -21,36 +20,45 @@ export default class Thoughts {
 		return class {
 			constructor() {
         this.table = table
-        this.hasOne = []
-        this.hasMany = []
+        this._hasOne = []
+        this._hasMany = []
+        this._belongsTo = []
+        this._belongsToMany = []
 			}
 
-			all({ start, limit, orderBy, direction }) {
+			all(params = {}) {
+				const excepts = []
+
 				return rdb.console(cmd => {
           let base = cmd.table(table)
 
-          if (Object.keys(this.hasOne).length || Object.keys(this.hasMany).length) {
+          if (Object.keys(this._hasOne).length || Object.keys(this._hasMany).length) {
             base = base.merge(e => {
               let relations = {}
 
-              // this.hasOne.forEach(single => {
-              //   relations[single.table] = cmd.table(single.table).getAll({
-              //     [single.field]: single.id
-              //   }).nth(0).default({})
-              // })
+              this._hasOne.forEach(single => {
+              	excepts.push(single.table + '_id')
+                
+                relations[single.table] = cmd
+                	.table(single.table)
+                	.get(e(single.table + '_id'))
+                	.default({})
+              })
 
-              // this.hasMany.forEach(many => {
-              //   relations[many.table] = cmd.table(single.table).getAll({
+              this._hasMany.forEach(many => {
+              	excepts.push(many.table + '_id')
+              	
+              	relations[many.table] = cmd
+              		.table(many.table)
+              		.getAll(e(many.table + '_id'))
+              		.coerceTo('array').default([])
+              })
 
-              //   })
-              // })
-
-              return {
-
-              }
+              return relations
             })
           }
 
+          return base.without(excepts).coerceTo('array')
         })
 			}
 
@@ -82,6 +90,20 @@ export default class Thoughts {
 				return rdb.console(cmd =>
 					cmd.table(table).get(id).delete()
 				)
+			}
+
+			hasOne(table, fk) {
+				this._hasOne.push({
+					table,
+					foreign: fk || table + '_id'
+				})
+			}
+
+			hasMany(table, fk) {
+				this._hasMany.push({
+					table,
+					foreign: fk || table + '_id'
+				})
 			}
 
 			extendModel(name, fn) {

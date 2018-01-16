@@ -28,13 +28,9 @@ const Users = thoughts.createModel('users', (schema) => {
 })
 
 const users = new Users()
+users.hasOne('groups')
 
-const res = users.create({
-	name: 4
-})
-
-res.then(console.log)
-.catch(console.error)
+users.all().then(console.log)
 
 // users.extendModel('getSomething', (r, start, limit) => 
 // 	r.slice(start, limit).coerceTo('array')

@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "sources": [
+    "http.js"
+  ],
+  "names": [
+    "app",
+    "server",
+    "config",
+    "port",
+    "secret",
+    "viewPath",
+    "publicPath",
+    "MS",
+    "use",
+    "json",
+    "urlencoded",
+    "extended",
+    "raw",
+    "type",
+    "text",
+    "store",
+    "checkPeriod",
+    "resave",
+    "saveUninitialized",
+    "cookie",
+    "secure",
+    "static",
+    "set",
+    "configure",
+    "callback",
+    "start",
+    "listen",
+    "console",
+    "log"
+  ],
+  "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,MAAM,wBAAZ;;AAEA,IAAMC,SAAS,SAATA,MAAS,CAACC,MAAD,EAAY;AAAA,MACjBC,IADiB,GACsBD,MADtB,CACjBC,IADiB;AAAA,MACXC,MADW,GACsBF,MADtB,CACXE,MADW;AAAA,MACHC,QADG,GACsBH,MADtB,CACHG,QADG;AAAA,MACOC,UADP,GACsBJ,MADtB,CACOI,UADP;;AAEzB,MAAMC,KAAK,oDAAX;;AAGAP,MAAIQ,GAAJ,CAAQ,qBAAWC,IAAX,EAAR;AACAT,MAAIQ,GAAJ,CAAQ,qBAAWE,UAAX,CAAsB,EAAEC,UAAU,KAAZ,EAAtB,CAAR;AACAX,MAAIQ,GAAJ,CAAQ,qBAAWI,GAAX,CAAe,EAAEC,MAAM,wBAAR,EAAf,CAAR;AACAb,MAAIQ,GAAJ,CAAQ,qBAAWI,GAAX,CAAe,EAAEC,MAAM,6BAAR,EAAf,CAAR;AACAb,MAAIQ,GAAJ,CAAQ,qBAAWM,IAAX,CAAgB,EAAED,MAAM,WAAR,EAAhB,CAAR;AACAb,MAAIQ,GAAJ,CAAQ,6BAAR;AACAR,MAAIQ,GAAJ,CAAQ,6BAAR;AACAR,MAAIQ,GAAJ,CAAQ,4BAAR;AACAR,MAAIQ,GAAJ,CAAQ,uBAAR;AACAR,MAAIQ,GAAJ,CAAQ,8BAAQ;AACdO,WAAO,IAAIR,EAAJ,CAAO;AACZS,mBAAa;AADD,KAAP,CADO;AAIdZ,kBAJc;AAKda,YAAQ,KALM;AAMdC,uBAAmB,IANL;AAOdC,YAAQ,EAAEC,QAAQ,IAAV;AAPM,GAAR,CAAR;AASApB,MAAIQ,GAAJ,CAAQ,kBAAQa,MAAR,CAAef,UAAf,CAAR;AACAN,MAAIsB,GAAJ,CAAQ,aAAR,EAAuB,KAAvB;AACAtB,MAAIsB,GAAJ,CAAQ,OAAR,EAAiBjB,QAAjB;;AAEA,SAAO;AACLkB,eAAW,mBAACC,QAAD;AAAA,aAAcA,SAASxB,GAAT,CAAd;AAAA,KADN;AAELyB,WAAO,iBAAM;AACXzB,UAAI0B,MAAJ,CAAWvB,IAAX,EAAiB,YAAM;AACrBwB,gBAAQC,GAAR,CAAY,qBAAZ,EAAmCzB,IAAnC;AACD,OAFD;AAGD;AANI,GAAP;AAQD,CAnCD;;kBAsCeF,M",
+  "file": "http.js",
+  "sourceRoot": "../../src/Server",
+  "sourcesContent": [
+    "import express from 'express'\nimport helmet from 'helmet'\nimport cookieParser from 'cookie-parser'\nimport bodyParser from 'body-parser'\nimport compression from 'compression'\nimport session from 'express-session'\nimport memoryStore from 'memorystore'\nimport responseTime from 'response-time'\nimport cors from 'cors'\n\nconst app = express()\n\nconst server = (config) => {\n  const { port, secret, viewPath, publicPath } = config\n \tconst MS = memoryStore(session)\n\n\n  app.use(bodyParser.json())\n  app.use(bodyParser.urlencoded({ extended: false }))\n  app.use(bodyParser.raw({ type: 'application/javascript' }))\n  app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))\n  app.use(bodyParser.text({ type: 'text/html' }))\n  app.use(cookieParser())\n  app.use(responseTime())\n  app.use(compression())\n  app.use(helmet())\n  app.use(session({\n    store: new MS({\n      checkPeriod: 86400000\n    }),\n    secret,\n    resave: false,\n    saveUninitialized: true,\n    cookie: { secure: true }\n  }))\n  app.use(express.static(publicPath))\n  app.set('view engine', 'pug')\n  app.set('views', viewPath)\n\n  return {\n    configure: (callback) => callback(app),\n    start: () => {\n      app.listen(port, () => {\n        console.log('app running on port', port)\n      })\n    }\n  }\n}\n\n\nexport default server\n"
+  ]
+}

@@ -44120,7 +44120,40 @@ Styleguide pt-tree
   color: #bfccd6; }
 
 .pt-dark .pt-tree-node.pt-tree-node-selected > .pt-tree-node-content {
-  background-color: #137cbd; }/*
+  background-color: #137cbd; }
+body {
+    margin: 0;
+    background: #eee;
+}
+.appRoot {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.login {
+    width: 20em;
+    padding: 1em;
+}
+
+.login-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-input {
+    margin: 0.50em 0;
+}
+
+.pt-input {
+    display: block;
+}/*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  */
 .container {

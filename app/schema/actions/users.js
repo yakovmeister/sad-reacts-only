@@ -7,7 +7,7 @@ import { users as userType } from './../types'
 
 const users = new Users()
 
-module.exports = {
+export default {
 	users: {
     type: new GraphQLList(userType),
     resolve: (root) => 

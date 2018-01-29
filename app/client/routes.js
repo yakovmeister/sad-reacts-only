@@ -27,8 +27,7 @@ export default [
       },
       {
 				routes: app,
-        component: App,
-        exact: true
+        component: App
       }
     ]
 	}

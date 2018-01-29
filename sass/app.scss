@@ -1,5 +1,7 @@
 @import "~@blueprintjs/core/dist/blueprint.css";
 @import "~@blueprintjs/core/dist/variables";
+@import "./styles/elements.css";
+@import "./styles/theme.css";
 
 .container {
 	display: flex;

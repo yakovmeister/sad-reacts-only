@@ -7,6 +7,10 @@ export default class Root extends PureComponent {
   render() {
     const { route } = this.props
 
-    return renderRoutes(route.routes)
+    return (
+      <div className='appRoot'>
+        { renderRoutes(route.routes) }
+      </div>
+    )
   }
 }

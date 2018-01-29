@@ -27,7 +27,7 @@ export default class Users {
         return { token }
       }
 
-      throw new Error({ message: 'Incorrect username/password' })
+      throw new Error('Incorrect username/password')
     }).catch(reject => 
       reject
     )

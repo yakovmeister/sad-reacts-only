@@ -12,12 +12,16 @@ class Login extends PureComponent {
       input: {
         usename: '',
         password: ''
-      }
+      },
+      notif: []
     }
   }
   
-  componentDidUpdate(nextProps) {
-    console.log(nextProps)
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.notif) {
+      console.log(nextState.notif)
+    }
+    console.log(false)
   }
 
   handleInputChange(field, e) {
@@ -33,9 +37,13 @@ class Login extends PureComponent {
     const { login } = this.props
     const { input } = this.state
 
-    const sample = login(input.username, input.password)
-
-    console.log(sample)
+    login(input.username, input.password).then(resolve => {
+      if (resolve.notif === 'error') {
+        this.setState({
+          notif: resolve
+        })
+      }
+    })
   }
 
 	render() {
@@ -97,10 +105,17 @@ const login = graphql(mutation, {
         }
       })
       .then(({ data }) => {
-        window.localStorage.token = data.login.token
+        if (data) {
+          window.localStorage.token = data.login.token
+        }
+
+        throw new Error('User does not exist.')
       })
       .catch(reject => {
-        console.log(reject)
+        return {
+          notif: 'error',
+          message: reject.graphQLErrors[0].message
+        }
       })
     }
   })

@@ -45,6 +45,7 @@
     "graphql-tools": "^2.17.0",
     "helmet": "^3.9.0",
     "joi": "^13.1.0",
+    "jsonwebtoken": "^8.1.1",
     "memorystore": "^1.6.0",
     "multer": "^1.3.0",
     "passport": "^0.4.0",

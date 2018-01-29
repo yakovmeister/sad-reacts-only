@@ -1,5 +1,6 @@
 import {
 	GraphQLList
+	, GraphQLString
 	, GraphQLInt
 } from 'graphql'
 import Users from './../../models/Users'
@@ -24,5 +25,21 @@ export default {
 	      type: GraphQLInt
 	    } 
 	  }
+	},
+
+	login: {
+		type: userType,
+		resolve: (root, { username, password }) =>
+			users.login(username, password).then(token => token),
+		args: {
+			username: {
+				name: 'username',
+				type: GraphQLString
+			},
+			password: {
+				name: 'password',
+				type: GraphQLString
+			}
+		}
 	}
 }

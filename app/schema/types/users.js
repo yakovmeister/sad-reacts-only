@@ -6,8 +6,14 @@ export default new GraphQLObjectType({
     id: {
       type: GraphQLString
     },
-    name: {
+    username: {
     	type: GraphQLString
+    },
+    token: {
+      type: GraphQLString
+    },
+    error: {
+      type: GraphQLString
     }
   }
 })

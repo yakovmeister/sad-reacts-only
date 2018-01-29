@@ -6,8 +6,37 @@ import { graphql } from 'react-apollo'
 
 class Login extends PureComponent {
 	constructor(props) {
-		super(props)
-	}
+    super(props)
+    
+    this.state = {
+      input: {
+        usename: '',
+        password: ''
+      }
+    }
+  }
+  
+  componentDidUpdate(nextProps) {
+    console.log(nextProps)
+  }
+
+  handleInputChange(field, e) {
+    const state = { ... this.state }
+    const { input } = state
+
+    input[field] = e.target.value
+
+    this.setState({ input })
+  }
+
+  handleLogin(e) {
+    const { login } = this.props
+    const { input } = this.state
+
+    const sample = login(input.username, input.password)
+
+    console.log(sample)
+  }
 
 	render() {
     const p_loginContainer = {
@@ -20,21 +49,23 @@ class Login extends PureComponent {
 
     const p_username = {
       icon: 'pt-icon-user',
-      className: 'login-input'
+      className: 'login-input',
+      onChange: this.handleInputChange.bind(this, 'username')
     }
 
     const p_password = {
       icon: 'pt-icon-key',
       className: 'login-input',
-      type: 'password'
+      type: 'password',
+      onChange: this.handleInputChange.bind(this, 'password')
     }
 
     const p_btn = {
       className: 'pt-fill pt-intent-primary',
+      onClick: this.handleLogin.bind(this),
       text: 'Login'
     }
 
-    console.log(this.props.users)
     return (
       <div { ...p_loginContainer }>
         <div { ...p_login }>
@@ -47,4 +78,32 @@ class Login extends PureComponent {
   }
 }
 
-export default graphql(gql`query { users { id, name } }`)(({ data }) => <Login { ...data } />)
+const mutation = gql`
+  mutation($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      token,
+      error
+    }
+  }
+`
+
+const login = graphql(mutation, {
+  props: ({ ownProps, mutate }) => ({
+    login(username, password) {
+      return mutate({
+        variables: {
+          username,
+          password
+        }
+      })
+      .then(({ data }) => {
+        window.localStorage.token = data.login.token
+      })
+      .catch(reject => {
+        console.log(reject)
+      })
+    }
+  })
+})
+
+export default login(Login)

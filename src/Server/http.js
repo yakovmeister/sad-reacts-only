@@ -7,6 +7,7 @@ import session from 'express-session'
 import memoryStore from 'memorystore'
 import responseTime from 'response-time'
 import cors from 'cors'
+import passport from 'passport'
 
 const app = express()
 
@@ -33,6 +34,8 @@ const server = (config) => {
     saveUninitialized: true,
     cookie: { secure: true }
   }))
+  app.use(passport.initialize())
+  app.use(passport.session())
   app.use(express.static(publicPath))
   app.set('view engine', 'pug')
   app.set('views', viewPath)

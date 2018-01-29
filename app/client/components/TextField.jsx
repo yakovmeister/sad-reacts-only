@@ -1,5 +1,6 @@
 import React from 'react'
 
+const noop = function noop() {}
 
 const TextField = function TextField(props) {
 
@@ -16,12 +17,13 @@ const TextField = function TextField(props) {
     type: props.type,
     value: props.value,
     disabled: props.disabled,
-    placeholder: props.placeholder
+    placeholder: props.placeholder,
+    onChange: props.onChange
   }
 
   return (
     <div { ...p_inputGroup }>
-      <span { ...p_inputIcon} ></span>
+      <span { ...p_inputIcon}></span>
       <input { ...p_input } />
     </div>
   )
@@ -29,6 +31,7 @@ const TextField = function TextField(props) {
 
 TextField.defaultProps = {
   disabled: false,
+  onChange: noop,
   type: 'text'
 }
 

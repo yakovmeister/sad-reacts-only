@@ -7,5 +7,5 @@ import {
 const opts = {}
 
 passport.use(new JwtStrategy(opts, function callback(payload, done) {
-
+    console.log(payload)
 }))

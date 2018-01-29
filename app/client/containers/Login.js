@@ -1,11 +1,19 @@
 import React, { PureComponent, Fragment } from 'react'
 import { Button } from '@blueprintjs/core'
 import TextField from './../components/TextField'
+import tag from 'graphql-tag'
+import { graphql } from 'react-apollo'
 
-export default class Login extends PureComponent {
+class Login extends PureComponent {
 	constructor(props) {
 		super(props)
 	}
+
+  componentWillMount() {}
+
+  componentDidMount() {
+    console.log(this.props.data)
+  }
 
 	render() {
     const p_loginContainer = {
@@ -43,3 +51,5 @@ export default class Login extends PureComponent {
     )
   }
 }
+
+export default graphql(tag`query { users { id } }`)(props => <Login { ...props} />)

@@ -9,8 +9,8 @@ export default (req, res) => {
 
 	const content = renderToString(
 		<StaticRouter location={req.url} context={context}>
-	      { renderRoutes(routes) }
-	    </StaticRouter>
+	    { renderRoutes(routes) }
+	  </StaticRouter>
 	)
 
  	res.render('index', { content })

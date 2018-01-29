@@ -23,10 +23,12 @@ const p_apolloProvider = {
   client
 }
 
-render(
-  <ApolloProvider { ...p_apolloProvider }>
-    <Router>
+const App = () => (
+  <Router>
+    <ApolloProvider { ...p_apolloProvider }>
       { renderRoutes(routes) }
-    </Router>
-  </ApolloProvider>
-, document.getElementById('app'))
+    </ApolloProvider>
+  </Router>
+)
+
+render(<App /> , document.getElementById('app'))

@@ -1,8 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
-import { Button } from '@blueprintjs/core'
+import { Button, Popover } from '@blueprintjs/core'
 import TextField from './../components/TextField'
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import { login } from './../data/users'
 
 class Login extends PureComponent {
 	constructor(props) {
@@ -19,7 +18,7 @@ class Login extends PureComponent {
   
   componentWillUpdate(nextProps, nextState) {
     if (nextState.notif) {
-      console.log(nextState.notif)
+      console.log(nextState)
     }
     console.log(false)
   }
@@ -38,12 +37,16 @@ class Login extends PureComponent {
     const { input } = this.state
 
     login(input.username, input.password).then(resolve => {
-      if (resolve.notif === 'error') {
-        this.setState({
-          notif: resolve
-        })
-      }
+      
+    }).catch(error => {
+      this.setState({
+        notif: error.message
+      })
     })
+  }
+
+  toastRef(ref) {
+    this.toast = ref
   }
 
 	render() {
@@ -74,51 +77,23 @@ class Login extends PureComponent {
       text: 'Login'
     }
 
+    const p_tooltip = {
+      className: 'pt-popover',
+      content: 'sample'
+    }
+
     return (
       <div { ...p_loginContainer }>
         <div { ...p_login }>
           <TextField { ...p_username } />
           <TextField { ...p_password } />
-          <Button { ...p_btn } />
+          <Popover { ...p_tooltip }>
+            <Button { ...p_btn } />
+          </Popover>
         </div>
       </div>
     )
   }
 }
-
-const mutation = gql`
-  mutation($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      token,
-      error
-    }
-  }
-`
-
-const login = graphql(mutation, {
-  props: ({ ownProps, mutate }) => ({
-    login(username, password) {
-      return mutate({
-        variables: {
-          username,
-          password
-        }
-      })
-      .then(({ data }) => {
-        if (data) {
-          window.localStorage.token = data.login.token
-        }
-
-        throw new Error('User does not exist.')
-      })
-      .catch(reject => {
-        return {
-          notif: 'error',
-          message: reject.graphQLErrors[0].message
-        }
-      })
-    }
-  })
-})
 
 export default login(Login)

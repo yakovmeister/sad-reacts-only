@@ -44153,6 +44153,10 @@ body {
 
 .pt-input {
     display: block;
+}
+
+.pt-popover {
+    display: block;
 }/*
  * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
  */

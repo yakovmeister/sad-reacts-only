@@ -19,11 +19,11 @@ export default class Thoughts {
 
 		return class {
 			constructor() {
-        this.table = table
-        this._hasOne = []
-        this._hasMany = []
-        this._belongsTo = []
-        this._belongsToMany = []
+        	this.table = table
+			this._hasOne = []
+			this._hasMany = []
+			this._belongsTo = []
+			this._belongsToMany = []
 			}
 
 			all(params = {}) {

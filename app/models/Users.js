@@ -28,8 +28,6 @@ export default class Users {
       }
 
       throw new Error('Incorrect username/password')
-    }).catch(reject => 
-      reject
-    )
+    }).catch(reject => reject)
 	}
 }

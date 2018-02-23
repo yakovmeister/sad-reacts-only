@@ -9,6 +9,7 @@ import { ApolloProvider } from 'react-apollo'
 import routes from './routes'
 import {
   BrowserRouter as Router,
+  Switch,
   Route,
   Link
 } from 'react-router-dom'
@@ -25,9 +26,11 @@ const p_apolloProvider = {
 
 const App = () => (
   <Router>
-    <ApolloProvider { ...p_apolloProvider }>
-      { renderRoutes(routes) }
-    </ApolloProvider>
+    <Switch>
+      <ApolloProvider { ...p_apolloProvider }>
+        { renderRoutes(routes) }
+      </ApolloProvider>
+    </Switch>
   </Router>
 )
 

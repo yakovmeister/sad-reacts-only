@@ -6,13 +6,8 @@ import NotFound from './containers/NotFound'
 
 const app = [
 	{
-		path: '/app',
 		exact: true,
 		component: Index
-  },
-  {
-    path: '*',
-    component: NotFound
   }
 ]
 
@@ -26,8 +21,13 @@ export default [
         component: Login
       },
       {
+        path: '/home',
 				routes: app,
-        component: App
+        component: App,
+        exact: true
+      },
+      {
+        component: NotFound
       }
     ]
 	}

@@ -6,7 +6,6 @@ import routes from './../client/routes'
 
 export default (req, res) => {
 	const context = {}
-
 	const content = renderToString(
 		<StaticRouter location={req.url} context={context}>
 	    { renderRoutes(routes) }

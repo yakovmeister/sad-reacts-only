@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { Button, Popover } from '@blueprintjs/core'
 import TextField from './../components/TextField'
 import { login } from './../data/users'
+import { connect } from 'react-redux'
 
 class Login extends PureComponent {
 	constructor(props) {
@@ -14,6 +15,12 @@ class Login extends PureComponent {
       },
       notif: []
     }
+  }
+
+  componentDidMount() {
+    this.props.dispatch({
+        type: 'TEST'
+      })
   }
   
   componentWillUpdate(nextProps, nextState) {
@@ -96,4 +103,4 @@ class Login extends PureComponent {
   }
 }
 
-export default login(Login)
+export default connect(state => state)(login(Login))

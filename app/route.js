@@ -2,7 +2,6 @@ import application from './controllers/application'
 import Users from './controllers/Users'
 import NotFound from './controllers/errors/NotFound'
 import graphqlHTTP from 'express-graphql'
-
 import { buildSchema } from 'graphql'
 import schema from './schema'
 

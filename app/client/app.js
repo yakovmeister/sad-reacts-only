@@ -63,4 +63,9 @@ class App extends PureComponent {
   }
 }
 
+if(module.hot) {
+  console.log('hot reload enabled')
+  module.hot.accept()
+}
+
 render(<App /> , document.getElementById('app'))

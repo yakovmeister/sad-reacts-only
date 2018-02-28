@@ -11,7 +11,6 @@ const API = '/api/v1'
 const routes = (app) => {
 	/** api */
   app.use(GQ, graphqlHTTP({ schema }))
-  app.use(`${API}/log`, logging)
 	app.get(/^(?!\/api).*$/, application)
 	app.get('*', NotFound)
 }

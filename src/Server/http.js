@@ -14,8 +14,6 @@ const app = express()
 const server = (config) => {
   const { port, secret, viewPath, publicPath } = config
  	const MS = memoryStore(session)
-
-
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.raw({ type: 'application/javascript' }))
@@ -49,6 +47,5 @@ const server = (config) => {
     }
   }
 }
-
 
 export default server

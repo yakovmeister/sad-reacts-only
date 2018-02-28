@@ -4,7 +4,7 @@ import Container from './../components/Container'
 import { renderRoutes } from 'react-router-config';
 
 export default class App extends PureComponent {
-  render() {
+    render() {
     const { route } = this.props
 
     return (

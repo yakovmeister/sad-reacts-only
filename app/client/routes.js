@@ -21,7 +21,7 @@ export default [
         component: Login
       },
       {
-        path: '/home',
+        path: '/app',
 				routes: app,
         component: App,
         exact: true

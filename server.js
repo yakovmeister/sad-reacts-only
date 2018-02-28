@@ -1,21 +1,27 @@
-const { default: Server } = require('./src/Server/http')
-const { default: routes } = require('./app/route')
-const { env: init_env, Config, base_path } = require('./src/utility')
-const env = init_env()
-const config = new Config(env, base_path() + '/config')
-const { default: Thoughts } = require('./src/Database/Thoughts')
-global.thoughts = new Thoughts({
-  host: '172.17.0.2'
+import dotenv from 'dotenv'
+import utils from './src/utility'
+import Config from './src/utility/Config'
+import Server from './src/Server/http'
+import routes from './app/route'
+
+/** initialize environment configuration */
+dotenv.config()
+
+Object.keys(utils).map(function util(util) {
+  if (util !== 'Config') {
+    global[util] = utils[util]
+  }
 })
 
-const args = Object.assign(
-  {},
-  config.get('app'),
-  { publicPath: base_path() + '/public' }
-)
+global.config = new Config(base_path() + '/config')
 
-const app = Server(args)
+// port, secret, viewPath, publicPath
+const app = new Server({
+  port: env('SERVER_PORT', 8888),
+  secret: env('APP_SECRET', 'SomeRandomString'),
+  viewPath: './app/views',
+  publicPath: './public'
+})
 
 app.configure(app => routes(app))
 app.start()
-

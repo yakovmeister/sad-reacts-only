@@ -44167,3 +44167,17 @@ body {
 
 .pt-fixed-top + .container {
   margin-top: 50px; }
+
+.not-found {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.not-found-text {
+  font-size: 30px;
+  display: block; }
+
+.not-found-sub {
+  display: block; }

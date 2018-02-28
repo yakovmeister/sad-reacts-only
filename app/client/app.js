@@ -1,63 +1,66 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { renderRoutes } from 'react-router-config'
 import { 
-  ConnectedRouter
-  , routerReducer
-  , routerMiddleware
-  , push
-} from 'react-router-redux'
-import { Provider } from 'react-redux'
-import { 
-  createStore
+  compose
+  , createStore
   , combineReducers
   , applyMiddleware
-  , compose
 } from 'redux'
+import { 
+  push
+  , routerReducer
+  , ConnectedRouter
+  , routerMiddleware
+} from 'react-router-redux'
 import {
-  BrowserRouter as Router
-  , Switch
+  Link
   , Route
-  , Link
+  , Switch
+  , BrowserRouter as Router
 } from 'react-router-dom'
-import createHistory from 'history/createBrowserHistory'
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloProvider } from 'react-apollo'
+import React, { PureComponent } from 'react'
 import routes from './routes'
 import reducers from './reducers'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { ApolloClient } from 'apollo-client'
+import { ApolloProvider } from 'react-apollo'
+import { createHttpLink } from 'apollo-link-http'
+import { renderRoutes } from 'react-router-config'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import createHistory from 'history/createBrowserHistory'
 
-const history = createHistory()
-const middleware = routerMiddleware(history)
+class App extends PureComponent {
+  constructor(props) {
+    super(props)
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(
-    reducers
-    // insert combined reducers,
-    , composeEnhancers(applyMiddleware(...middleware))
-  )
+    this.history = createHistory()
+    this.middleware = routerMiddleware(this.history)
+    this.composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    this.store = createStore(
+      reducers
+      , this.composeEnhancers(
+        applyMiddleware(this.middleware)
+      )
+    )
+    this.client = new ApolloClient({
+      // static for now
+      link: createHttpLink({ uri: 'http://localhost:8888/api/v1' }),
+      cache: new InMemoryCache
+    })
+  }
 
-const client = new ApolloClient({
-  // static for now
-  link: createHttpLink({ uri: 'http://localhost:8888/api/v1' }),
-  cache: new InMemoryCache
-})
-
-const p_apolloProvider = {
-  client
+  render() {
+    return (
+      <Provider store={ this.store }>
+        <ConnectedRouter history={ this.history }>
+          <Switch>
+            <ApolloProvider client={ this.client }>
+              { renderRoutes(routes) }
+            </ApolloProvider>
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
+    )
+  }
 }
-
-const App = () => (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Switch>
-        <ApolloProvider { ...p_apolloProvider }>
-          { renderRoutes(routes) }
-        </ApolloProvider>
-      </Switch>
-    </ConnectedRouter>
-  </Provider>
-)
 
 render(<App /> , document.getElementById('app'))

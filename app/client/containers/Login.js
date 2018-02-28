@@ -16,12 +16,6 @@ class Login extends PureComponent {
       notif: []
     }
   }
-
-  componentDidMount() {
-    this.props.dispatch({
-        type: 'TEST'
-      })
-  }
   
   componentWillUpdate(nextProps, nextState) {
     if (nextState.notif) {

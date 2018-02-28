@@ -1,5 +1,6 @@
+import { combineReducers } from 'redux'
+import app from './app'
 
-export default function test(state = 0, action = 'TEST') {
-	console.log('okay')
-	return { test: true }
-}
+export default combineReducers({
+	app
+})

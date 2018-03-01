@@ -22,10 +22,10 @@ export default class Config {
 
     read_directory(dir).forEach(fileName => {
       if (fileName && fileName.includes('.js')) {
-        let config = require(dir + path.sep + fileName),
+        let config = require(dir + path.sep + fileName).default,
           configKey = fileName.split('.')[0]
 
-        this.configs[configKey] = config
+        this.configs[configKey] = { ...config }
       }
     })
 

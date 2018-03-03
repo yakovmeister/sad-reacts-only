@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { findDOMNode } from 'react-dom'
 import Ipsum from 'react-lorem-component'
 import Navigation from './Navigation';
 
@@ -8,12 +9,14 @@ export default class Intro extends PureComponent {
   }
 
   componentDidMount() {
-    console.log(this.props)
+    const scroll = findDOMNode(this)
+
+    console.log('@scroll', scroll.scrollTop)
   }
 
   render() {
     return(
-      <div className={`app-intro`}>
+      <div className={`app-intro animated fadeIn`}>
         <div className={`app-intro__inner`}>
           <div className={`app-intro__inner__headline`}>
             <Ipsum

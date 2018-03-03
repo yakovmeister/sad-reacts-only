@@ -65,7 +65,7 @@ class App extends PureComponent {
 
 if(module.hot) {
   console.log('hot reload enabled')
-  module.hot.accept()
+  module.hot.accept(App)
 }
 
 render(<App /> , document.getElementById('app'))

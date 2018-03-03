@@ -26,7 +26,7 @@ export default [
       {
         path: '/',
         exact: true,
-        component: Login
+        component: Index
       },
       {
         path: '/app',

@@ -1,9 +1,14 @@
 import React, { PureComponent } from 'react'
 import Ipsum from 'react-lorem-component'
+import Navigation from './Navigation';
 
 export default class Intro extends PureComponent {
   constructor(props) {
     super(props)
+  }
+
+  componentDidMount() {
+    console.log(this.props)
   }
 
   render() {
@@ -24,6 +29,7 @@ export default class Intro extends PureComponent {
               sentenceUpperBound={4}
             />
           </div>
+          <Navigation />
         </div>
       </div>
     )

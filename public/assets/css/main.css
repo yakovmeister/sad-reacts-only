@@ -6082,3 +6082,9 @@ html, body {
 
 .sample {
   min-height: 400px; }
+
+.app-nav .nav .nav-item .nav-link {
+  color: #fff; }
+
+.app-nav .nav .nav-item .nav-link.active {
+  border-bottom: 3px solid #fff; }

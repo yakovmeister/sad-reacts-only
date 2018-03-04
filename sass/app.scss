@@ -1,3 +1,4 @@
+@import "~aos/dist/aos.css";
 @import "~bootstrap/scss/bootstrap";
 @import "~animate.css";
 @import "./styles/fonts.scss";
@@ -29,7 +30,7 @@ html, body {
 .app-intro__inner {
   width: inherit;
   height: inherit;
-  background-color: rgba(5, 5, 5, 0.6);
+  background-color: rgba(3, 3, 3, 0.75);
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

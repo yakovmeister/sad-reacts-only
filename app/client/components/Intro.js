@@ -43,10 +43,10 @@ export default class Intro extends PureComponent {
     return(
       <div className={`app-intro animated fadeIn`}>
         <div className={`app-intro__inner`}>
-          <div className={`app-intro__inner__headline`}>
+          <div className={`headline`}>
             <p>Jacob Baring</p>
           </div>
-          <div className={`app-intro__inner__sub-headline`}>
+          <div className={`sub-headline`}>
             <ReactCSSTransitionGroup
               transitionEnterTimeout={500}
               transitionLeaveTimeout={300}

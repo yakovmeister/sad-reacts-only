@@ -23,7 +23,7 @@
   "dependencies": {
     "@blueprintjs/core": "^1.35.5",
     "animate.css": "^3.6.1",
-    "aos": "^2.2.0",
+    "aos": "^2.0.0",
     "apollo-cache-inmemory": "^1.1.9",
     "apollo-client": "^2.2.5",
     "apollo-client-preset": "^1.0.6",

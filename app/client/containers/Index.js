@@ -9,16 +9,9 @@ class Index extends PureComponent {
 		super(props)
   }
   
-  componentWillMount() {
-  	this.props.dispatch({
-  		type: 'SAMPLE',
-  		payload: 'halloo'
-  	})
-  }
+  componentWillMount() {}
 
-  componentDidMount() {
-    console.log(this.props)
-  }
+  componentDidMount() {}
 
 	render() {
 		return (

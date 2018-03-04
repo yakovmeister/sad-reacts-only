@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import { findDOMNode } from 'react-dom'
 import Ipsum from 'react-lorem-component'
 import Navigation from './Navigation'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class Intro extends PureComponent {
   constructor(props) {
@@ -10,13 +9,19 @@ export default class Intro extends PureComponent {
 
     this.state = {
       descriptionIndex: 0,
-      descriptionAnimate: 'fadeInLeft' 
+      descriptionAnimate: 0 
     }
 
     this.descriptions = [
-      'Web Developer',
-      '2k Dota2 Scrub',
-      'Coffee Enthusiast'
+      'am a Web Developer.',
+      'code for living.',
+      'make money out of coffee.'
+    ]
+
+    this.descriptionAnimations = [
+      'wobble',
+      'swing',
+      'tada'
     ]
   }
 
@@ -32,13 +37,20 @@ export default class Intro extends PureComponent {
   }
 
   generateRandomIndex() {
-    this.setState({
-      descriptionIndex: Math.floor(Math.random() * this.descriptions.length)
-    })
+    this.setState((prev) => ({
+      descriptionIndex: prev.descriptionIndex + 1,
+      descriptionAnimate: prev.descriptionAnimate + 1
+    }))
   }
 
   render() {
     const { descriptionIndex, descriptionAnimate } = this.state
+    const animation = this.descriptionAnimations[
+      descriptionAnimate % this.descriptionAnimations.length
+    ]
+    const description = this.descriptions[
+      descriptionIndex % this.descriptions.length
+    ]
 
     return(
       <div className={`app-intro animated fadeIn`}>
@@ -47,18 +59,10 @@ export default class Intro extends PureComponent {
             <p>Jacob Baring</p>
           </div>
           <div className={`sub-headline`}>
-            <ReactCSSTransitionGroup
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}
-              transitionName={{
-                enter: "animated",
-                enterActive: "rubberBand",
-                leave: "animated",
-                leaveActive: "rubberBand"
-              }}
-            >
-              <p key={`description-text`}>{ this.descriptions[descriptionIndex] }</p>
-            </ReactCSSTransitionGroup>
+            <h4 title="Programming is born from sadness and suffering.">「プログラミングは悲しみと苦しみから生まれる。」</h4>
+          </div>
+          <div className={`sub-headline`}>
+            <p>I { description }</p>
           </div>
           <Navigation />
         </div>

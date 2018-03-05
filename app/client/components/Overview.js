@@ -14,11 +14,11 @@ export default class Overview extends PureComponent {
 
   render() {
     return (
-      <div className={`app-overview`}
-        data-aos={`fade-up`}
-        data-aos-anchor-placement={`top-center`}
-      >
-        <div className={`app-overview__inner`}>
+      <div className={`app-overview`}>
+        <div className={`app-overview__inner`}
+          data-aos={`fade-up`}
+          data-aos-anchor-placement={`top-center`}
+        >
           <Ipsum />
         </div>
       </div>

@@ -18,6 +18,7 @@ class Index extends PureComponent {
 	render() {
 		return (
 			<Fragment>
+        <Navigation />
 				<Intro />
         <Overview />
 			</Fragment>

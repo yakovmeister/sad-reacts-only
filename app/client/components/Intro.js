@@ -66,7 +66,6 @@ export default class Intro extends PureComponent {
           <div className={`sub-headline`}>
             <p>I { description }</p>
           </div>
-          <Navigation />
         </div>
       </div>
     )

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import Ipsum from 'react-lorem-component'
-// import AOS from 'aos'
 
 export default class Overview extends PureComponent {
   constructor(props) {
@@ -8,7 +7,9 @@ export default class Overview extends PureComponent {
   }
 
   componentDidMount() {
-    // AOS.init()
+    const AOS = require('aos')
+
+    AOS.init()
   }
 
   render() {

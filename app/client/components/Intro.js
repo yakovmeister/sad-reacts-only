@@ -59,7 +59,9 @@ export default class Intro extends PureComponent {
             <p>Jacob Baring</p>
           </div>
           <div className={`sub-headline`}>
-            <h4 title="Programming is born from sadness and suffering.">「プログラミングは悲しみと苦しみから生まれる。」</h4>
+            <h4 title="Programming is born from sadness and suffering.">
+              「プログラミングは悲しみと苦しみから生まれる。」
+            </h4>
           </div>
           <div className={`sub-headline`}>
             <p>I { description }</p>

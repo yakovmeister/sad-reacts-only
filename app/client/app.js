@@ -41,20 +41,22 @@ class App extends PureComponent {
         applyMiddleware(this.middleware)
       )
     )
-    // this.client = new ApolloClient({
-    //   // static for now
-    //   link: createHttpLink({ uri: 'http://localhost:8888/api/v1' }),
-    //   cache: new InMemoryCache
-    // })
+    this.client = new ApolloClient({
+      // static for now
+      link: createHttpLink({ uri: 'http://localhost:8888/api/v1' }),
+      cache: new InMemoryCache
+    })
   }
 
   render() {
     return (
       <Provider store={ this.store }>
         <ConnectedRouter history={ this.history }>
-          <Switch>
-            { renderRoutes(routes) }
-          </Switch>
+          <ApolloProvider client={ this.client }>
+            <Switch>
+              { renderRoutes(routes) }
+            </Switch>
+          </ApolloProvider>
         </ConnectedRouter>
       </Provider>
     )

@@ -11,7 +11,9 @@ class Index extends PureComponent {
   
   componentWillMount() {}
 
-  componentDidMount() {}
+  componentDidMount() {
+  	console.log(this.props)
+  }
 
 	render() {
 		return (
@@ -22,6 +24,5 @@ class Index extends PureComponent {
 		)
 	}
 }
-
 
 export default connect(state => state)(Index)

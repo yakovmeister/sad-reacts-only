@@ -1,13 +1,21 @@
 import React from 'react'
 
 const Navigation = (props) => {
+  const { fixed } = props
 	return (
     <div className={`app-nav`}>
-      <nav className="navbar fixed-top">
-        <ul className="navbar-nav mr-auto"></ul>
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <a className="nav-link" href="/?page=logout"><span className="fa fa-sign-out-alt"></span> Log out</a>
+      <nav class={`navbar fixed-top${
+        fixed 
+          ? ' navbar-custom-fixed' 
+          : ' navbar-custom'
+      }`}>
+        <ul class="navbar-nav mr-auto"></ul>
+        <ul class="navbar-nav nav-custom">
+          <li class="nav-item">
+            <a class="nav-link" href="/?page=logout"> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/?page=logout"> Contact</a>
           </li>
         </ul>
       </nav>

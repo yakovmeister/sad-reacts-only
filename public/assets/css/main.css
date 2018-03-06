@@ -8586,12 +8586,6 @@ html, body {
 .sample {
   min-height: 400px; }
 
-.app-nav .nav .nav-item .nav-link {
-  color: #fff; }
-
-.app-nav .nav .nav-item .nav-link.active {
-  border-bottom: 3px solid #fff; }
-
 ::-webkit-scrollbar {
   width: 5px; }
 
@@ -8600,3 +8594,18 @@ html, body {
 
 ::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
+
+.navbar.navbar-custom {
+  align-items: flex-end;
+  height: 20em; }
+  .navbar.navbar-custom .nav-custom {
+    flex-direction: row; }
+    .navbar.navbar-custom .nav-custom .nav-item {
+      margin: 0 8px 0 8px; }
+      .navbar.navbar-custom .nav-custom .nav-item .nav-link {
+        color: #fff;
+        font-weight: bold;
+        border-bottom: 2px solid #fff; }
+
+.navbar.navbar-custom-fixed .nav-custom {
+  flex-direction: row; }

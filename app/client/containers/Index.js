@@ -7,18 +7,42 @@ import { connect } from 'react-redux'
 class Index extends PureComponent {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			fixedNavigation: false
+		}
+
+		this.handleStickyNavigation = this.handleStickyNavigation.bind(this)
   }
   
   componentWillMount() {}
 
   componentDidMount() {
-  	console.log(this.props)
-  }
+		window.addEventListener('scroll', this.handleStickyNavigation)
+	}
+	
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleStickyNavigation)
+	}
+
+	handleStickyNavigation() {
+		const { fixedNavigation } = this.state
+		if(window.pageYOffset > 100 && !fixedNavigation) {
+			this.setState({
+				fixedNavigation: true
+			})
+		} else if (window.pageYOffset <= 100 && fixedNavigation) {
+			this.setState({
+				fixedNavigation: false
+			})
+		}
+	}
 
 	render() {
+		const { fixedNavigation } = this.state
 		return (
 			<Fragment>
-        <Navigation />
+        <Navigation fixed={fixedNavigation} />
 				<Intro />
         <Overview />
 			</Fragment>

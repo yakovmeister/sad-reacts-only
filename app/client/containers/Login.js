@@ -17,12 +17,7 @@ class Login extends PureComponent {
     }
   }
   
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.notif) {
-      console.log(nextState)
-    }
-    console.log(false)
-  }
+  componentWillUpdate(nextProps, nextState) {}
 
   handleInputChange(field, e) {
     const state = { ... this.state }

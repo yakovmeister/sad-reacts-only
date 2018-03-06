@@ -32,6 +32,9 @@ export default class Intro extends PureComponent {
     )
   }
 
+  componentWillUpdate() {
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval)
   }
@@ -56,7 +59,8 @@ export default class Intro extends PureComponent {
       <div className={`app-intro animated fadeIn`}>
         <div className={`app-intro__inner`}>
           <div className={`headline`}>
-            <p>Jacob Baring</p>
+            {/* <p>Jacob Baring</p> */}
+            <p>Lorem ipsum</p>
           </div>
           <div className={`sub-headline`}>
             <h4 title="Programming is born from sadness and suffering.">
@@ -64,7 +68,7 @@ export default class Intro extends PureComponent {
             </h4>
           </div>
           <div className={`sub-headline`}>
-            <p>I { description }</p>
+            {/* <p>I { description }</p> */}
           </div>
         </div>
       </div>
